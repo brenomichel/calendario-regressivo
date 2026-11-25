@@ -49,6 +49,28 @@ p{color:var(--mut)}
 .fx .d{background:var(--cor);color:#fff;border-radius:20px;padding:2px 7px;font-weight:800}
 
 .pi{display:block;width:100%;max-width:280px;height:auto;aspect-ratio:1;margin:0 auto 6px;border-radius:16px}
+/* situações */
+.sits{background:var(--az)}
+.sits h2{color:#fff}
+.sits .lead{color:#C9DCEB;text-align:center;margin:-12px 0 20px}
+.sit{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.sit .ic{flex:none;width:42px;height:42px;border-radius:50%;background:var(--gelo2);display:grid;place-items:center;font-size:21px}
+.sit h3{font-family:system-ui,sans-serif;font-size:16px;font-weight:800;line-height:1.3;color:var(--az);margin-bottom:4px}
+.sit p{font-size:14.5px;line-height:1.45}
+.sit .tg{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;color:#fff;background:var(--cor2);border-radius:6px;padding:2px 7px;margin-bottom:6px}
+/* avaliações (aparece só com depoimentos reais) */
+.rv-top{display:flex;align-items:center;justify-content:center;gap:12px;margin:-8px 0 20px}
+.rv-top b{font-size:40px;line-height:1;color:var(--az)}
+.rv-top small{display:block;font-size:13px;color:var(--mut)}
+.rvs{color:#F5B301;letter-spacing:1px;font-size:16px}
+.rv{background:#fff;border:1px solid #E2E8EE;border-radius:14px;padding:16px;margin-bottom:12px}
+.rv-h{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:17px;object-fit:cover}
+.rv-h strong{display:block;font-size:15px;color:var(--ink)}
+.rv-h span{font-size:12.5px;color:var(--mut)}
+.rv .rvs{font-size:14px}
+.rv-h .av{color:#fff;font-size:17px}
+.rv p{font-size:15px;color:var(--ink);margin-top:4px}
 /* hero */
 .hi{display:block;width:100%;max-width:440px;height:auto;aspect-ratio:1;margin:6px auto 0;border-radius:16px}
 .hero{position:relative;height:clamp(290px,82vw,380px);margin:8px auto 0;max-width:400px}
@@ -280,6 +302,22 @@ footer b{color:#fff}
  </div>
 </section>
 
+<!-- SITUAÇÕES EM QUE AS FICHAS AJUDAM -->
+<section class="sits">
+ <div class="w">
+  <h2>Situações em que as fichas ajudam</h2>
+  <p class="lead">Se você se reconhece em alguma delas, o Calendário foi feito pra você.</p>
+  <div class="sit"><span class="ic">📅</span><div><h3>Você sabe a data da volta, mas não sabe por onde começar</h3><p>O calendário divide a preparação em passos menores e mostra o que fazer em cada dia.</p></div></div>
+  <div class="sit"><span class="ic">❄️</span><div><h3>Você olha frasco por frasco para decidir qual usar</h3><p>Com a Fila do Freezer e as datas identificadas, fica simples seguir a ordem: o mais antigo sai primeiro.</p></div></div>
+  <div class="sit"><span class="ic">👵</span><div><h3>O bebê vai ficar com a avó e você não quer explicar tudo de novo toda manhã</h3><p>O painel fica na geladeira com horários e anotações no mesmo lugar, para ela consultar sozinha.</p></div></div>
+  <div class="sit"><span class="ic">✏️</span><div><h3>Você quer um plano que siga a rotina da sua casa</h3><p>As fichas são para preencher do seu jeito, e o Checklist do D-1 ajuda a revisar o que deixar pronto antes do primeiro dia.</p></div></div>
+  <div class="sit"><span class="ic">⏱️</span><div><h3>Você não tem tempo para ler um guia inteiro</h3><p>As fichas são visuais: você abre a página de que precisa, sem procurar a informação no meio de muito texto.</p></div></div>
+  <div class="sit"><span class="ic">💬</span><div><span class=tg>BÔNUS DO COMPLETO</span><h3>Você precisa combinar as pausas com o RH</h3><p>O Kit Conversa com o RH ajuda a chegar à conversa com seus horários e dúvidas já anotados.</p></div></div>
+  <div class="sit"><span class="ic">🎒</span><div><span class=tg>BÔNUS DO COMPLETO</span><h3>O bebê vai começar na creche</h3><p>A Edição Creche reúne numa ficha o que compartilhar com a equipe, para você revisar tudo antes de entregar.</p></div></div>
+  <a class="btn" href="#planos">QUERO MEU CALENDÁRIO</a>
+ </div>
+</section>
+
 <!-- DOBRA 6 — IDEAL PARA VOCÊ -->
 <section>
  <div class="w">
@@ -338,6 +376,15 @@ footer b{color:#fff}
   <div class="bn"><div class="stars">★★★★★</div><img class="bi" src="img/bonus-4-edicao-creche.webp" width="640" height="640" loading="lazy" decoding="async" alt="Bônus: Edição Creche"><span class="nb">BÔNUS 4</span>
    <h3>Edição Creche</h3><p>Ficha de envio do leite e bilhete pronto para a escola, no mesmo padrão do painel.</p><p class="pl">Só no Plano Completo</p>
    <div class="val"><s data-bonus="3"></s><b>GRÁTIS</b></div></div>
+ </div>
+</section>
+
+<!-- AVALIAÇÕES — só aparece quando houver depoimentos reais em CFG.depoimentos -->
+<section id="avaliacoes" hidden>
+ <div class="w">
+  <h2>O que dizem as mães que já usam</h2>
+  <div class="rv-top"><b id="rv-m"></b><div><span class="rvs" id="rv-s"></span><small id="rv-n"></small></div></div>
+  <div id="rv-l"></div>
  </div>
 </section>
 
@@ -445,11 +492,36 @@ const CFG={
  ancoraCompleto:"",        // ex.: "De R$ 67,00"
  parcBasico:"Pagamento único · Pix ou cartão",
  parcCompleto:"Pagamento único · Pix ou cartão",
- bonus:["","","",""]       // ex.: "R$ 17,00"
+ bonus:["","","",""],      // ex.: "R$ 17,00"
+ /* Depoimentos REAIS de clientes, com autorização. Vazio = seção escondida.
+    ex.: {nome:"Juliana S.", data:"há 2 dias", estrelas:5, texto:"...", foto:"img/dep-juliana.webp"} (foto opcional) */
+ depoimentos:[]
 };
 document.querySelectorAll("[data-cfg]").forEach(e=>{const v=CFG[e.dataset.cfg];if(v)e.textContent=v;else e.remove()});
 document.querySelectorAll("[data-bonus]").forEach(e=>{const v=CFG.bonus[+e.dataset.bonus];if(v)e.textContent=v;else e.remove()});
 document.querySelectorAll("[data-link]").forEach(e=>{const v=CFG[e.dataset.link];if(v&&v!=="#")e.href=v});
+/* avaliações */
+const D=CFG.depoimentos||[];
+if(D.length){
+ const sec=document.getElementById("avaliacoes"),L=document.getElementById("rv-l"),cores=["#1F3A5F","#E8552F","#1B8A6B","#6B4FA0","#C0392B","#2E86AB"];
+ const est=n=>"★".repeat(n)+"☆".repeat(5-n);
+ const media=D.reduce((a,d)=>a+(+d.estrelas||5),0)/D.length;
+ document.getElementById("rv-m").textContent=media.toFixed(1).replace(".",",");
+ document.getElementById("rv-s").textContent=est(Math.round(media));
+ document.getElementById("rv-n").textContent=D.length+(D.length>1?" avaliações":" avaliação");
+ D.forEach((d,i)=>{
+  const c=document.createElement("div");c.className="rv";
+  const h=document.createElement("div");h.className="rv-h";
+  let av;if(d.foto){av=document.createElement("img");av.src=d.foto;av.alt="";av.width=40;av.height=40;av.loading="lazy"}else{av=document.createElement("span");av.textContent=(d.nome||"?").trim().charAt(0).toUpperCase();av.style.background=cores[i%cores.length]}
+  av.className="av";
+  const w=document.createElement("div"),n=document.createElement("strong"),dt=document.createElement("span");
+  n.textContent=d.nome||"";dt.textContent=d.data||"";w.append(n,dt);h.append(av,w);
+  const s2=document.createElement("span");s2.className="rvs";s2.textContent=est(+d.estrelas||5);
+  const t=document.createElement("p");t.textContent=d.texto||"";
+  c.append(h,s2,t);L.append(c);
+ });
+ sec.hidden=false;
+}
 /* carrossel: carrega as 8 fichas juntas quando a seção se aproxima (sem pesar o 1º carregamento) */
 const ld=c=>c.querySelectorAll("img[data-src]").forEach(i=>{i.src=i.dataset.src;i.removeAttribute("data-src")});
 const cars=document.querySelectorAll(".car");

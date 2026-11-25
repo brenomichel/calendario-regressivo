@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calendário Regressivo de Estoque</title>
+<meta name="description" content="Do D-15 ao D-0: 24 fichas para montar, rotular e organizar o estoque de leite materno antes de voltar ao trabalho.">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://pay.hotmart.com">
+<link rel="preconnect" href="https://cashflow.mentoriaprocesso.com">
+<script src="https://cashflow.mentoriaprocesso.com/t/p.js?w=c53af0af-672b-4b6c-9b58-523e657ee8d6&o=9d654979-9c8d-448e-8f5c-695a79991938" data-offer="9d654979-9c8d-448e-8f5c-695a79991938" data-nowprocket data-no-minify="1" data-no-optimize="1" data-cfasync="false" async></script>
+<link rel="preload" as="image" href="img/hero.webp" type="image/webp" fetchpriority="high">
+<style>
+/* VOICE: acolhedora e prática, de mãe pra mãe, frases curtas
+   IDEA: a porta da geladeira organizada, com fichas A4 coladas
+   PICTURE: leque de fichas FICHA XX/24 em CSS puro (troque pelas imagens reais)
+   COLOUR and TYPE: azul profundo, azul-gelo, coral de ação, branco-leite; serifada nos títulos, sem serifa no texto, fontes do sistema (zero requisições)
+   LAYOUT: coluna única de até 480px, mobile-first, sem bibliotecas e sem imagens remotas */
+:root{color-scheme:light;--az:#1F3A5F;--gelo:#CFE8F3;--gelo2:#EAF5FA;--cor:#FF7A59;--cor2:#E8552F;--bg:#FAFCFF;--ink:#16283F;--mut:#4A5D75;--ok:#1B8A6B}
+*{box-sizing:border-box;min-width:0;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;overflow-x:clip}
+.w{max-width:480px;margin:0 auto;padding:0 18px}
+section{padding:44px 0}
+h1,h2,h3{font-family:ui-serif,Georgia,"Times New Roman",serif;line-height:1.12;text-wrap:balance;color:var(--az)}
+h1{font-size:clamp(29px,8.4vw,38px)}
+h2{font-size:clamp(25px,7vw,31px);text-align:center;margin-bottom:22px}
+h3{font-size:18px}
+p{color:var(--mut)}
+.c{text-align:center}
+.kick{font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--cor2);text-transform:uppercase;text-align:center;margin-bottom:12px}
+.hl{color:var(--cor2)}
+.line{width:72px;height:4px;border-radius:4px;background:var(--cor);margin:18px auto}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;color:#fff;font-weight:800;font-size:18px;line-height:1.2;padding:19px 16px;border-radius:14px;background:linear-gradient(180deg,#F2643E,var(--cor2));box-shadow:0 6px 0 #B83D1D,0 12px 24px rgba(232,85,47,.28);margin-top:24px;animation:pulse 2.2s ease-in-out infinite}
+.btn:active{transform:translateY(3px);box-shadow:0 3px 0 #B83D1D}
+.btn small{display:block;font-weight:600;font-size:13px;opacity:.92;margin-top:4px}
+@keyframes pulse{50%{transform:scale(1.025)}}
+.trust{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--mut);margin-top:14px}
+.trust span::before{content:"✓ ";color:var(--ok);font-weight:800}
+
+/* ficha mock (placeholder) */
+.fx{aspect-ratio:210/297;background:#fff;border-radius:8px;box-shadow:0 10px 28px rgba(31,58,95,.18);overflow:hidden;display:flex;flex-direction:column;font-family:system-ui,sans-serif}
+.fx-h{background:var(--az);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:6% 7%;font-size:9px;letter-spacing:.06em}
+.fx-h b{font-size:10px}
+.fx-t{font-family:ui-serif,Georgia,serif;font-weight:700;color:var(--az);font-size:15px;line-height:1.1;padding:7% 7% 4%}
+.fx-hero{flex:1;margin:0 7%;border-radius:6px;background:var(--gelo);display:grid;place-items:center;font-size:44px}
+.fx-l{height:6px;border-radius:3px;background:var(--gelo2);margin:6% 7% 0}.fx-l.s{width:55%}
+.fx-f{margin-top:6%;border-top:2px solid var(--gelo);padding:5% 7%;font-size:9px;font-weight:700;color:var(--cor2)}
+.fx .d{background:var(--cor);color:#fff;border-radius:20px;padding:2px 7px;font-weight:800}
+
+.pi{display:block;width:100%;max-width:280px;height:auto;aspect-ratio:1;margin:0 auto 6px;border-radius:16px}
+/* hero */
+.hi{display:block;width:100%;max-width:440px;height:auto;aspect-ratio:1;margin:6px auto 0;border-radius:16px}
+.hero{position:relative;height:clamp(290px,82vw,380px);margin:8px auto 0;max-width:400px}
+.hero .fx{position:absolute;top:8%;width:52%;left:24%}
+.hero .f1{transform:rotate(-12deg) translateX(-38%)}
+.hero .f3{transform:rotate(12deg) translateX(38%)}
+.hero .f2{z-index:2;top:2%}
+.hero .tag{position:absolute;z-index:3;right:4%;bottom:6%;background:var(--cor);color:#fff;font-weight:900;font-size:22px;padding:8px 14px;border-radius:12px;transform:rotate(-6deg);box-shadow:0 8px 18px rgba(232,85,47,.35);line-height:1}
+.hero .tag small{display:block;font-size:10px;font-weight:700;letter-spacing:.08em}
+
+/* carrossel contínuo */
+.car{overflow:hidden;margin:0 -18px;padding:14px 0 22px;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.trk{display:flex;width:max-content;animation:mv 11s linear infinite;will-change:transform}
+.trk.r{animation-direction:reverse;animation-duration:10s}
+.trk.t8{animation-duration:20s}
+.trk.t2{animation-duration:24s}
+.trk>.fq{width:min(78vw,320px)}
+.fq{display:block;height:auto;aspect-ratio:1;border-radius:16px;background:var(--gelo);box-shadow:0 10px 28px rgba(31,58,95,.18)}
+.fi{display:block;height:auto;aspect-ratio:440/622;border-radius:8px;background:#fff;box-shadow:0 10px 28px rgba(31,58,95,.18)}
+.trk>*{width:min(54vw,220px);margin-right:16px;flex:none}
+@keyframes mv{to{transform:translateX(-50%)}}
+
+/* grids */
+.g2{display:grid;grid-template-columns:1fr;gap:12px}
+.it{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #DDEBF3;border-radius:14px;padding:14px}
+.it .ic{flex:none;width:40px;height:40px;border-radius:12px;background:var(--gelo2);display:grid;place-items:center;font-size:21px}
+.it .bl{flex:none;width:26px;height:26px;border-radius:50%;background:var(--cor);color:#fff;font-weight:800;font-size:14px;display:grid;place-items:center;margin-top:1px}
+.it h3{font-family:system-ui,sans-serif;font-size:16px;font-weight:800;color:var(--az);margin-bottom:2px}
+.it p{font-size:14.5px;line-height:1.4}
+.intro{text-align:center;margin:0 0 18px}
+.alt{background:var(--gelo2)}
+
+/* dor */
+.faixa{background:var(--az);color:#fff;padding:30px 0}
+.faixa h2{color:#fff;margin:0}
+.faixa h2 span{color:#FFB39E}
+.dest{background:#fff;border-radius:20px;padding:24px 20px;box-shadow:0 14px 36px rgba(31,58,95,.12);border-top:6px solid var(--cor);margin-top:-6px}
+.dest h3{font-size:24px;margin-bottom:10px}
+.dest .d15{display:flex;gap:8px;justify-content:center;margin:16px 0 4px;flex-wrap:wrap}
+.dest .d15 span{font-weight:900;font-size:14px;padding:6px 10px;border-radius:8px;background:var(--gelo2);color:var(--az)}
+.dest .d15 span:first-child{background:var(--cor);color:#fff}
+
+/* tudo que recebe */
+.card{background:#fff;border-radius:22px;padding:24px 18px;box-shadow:0 14px 36px rgba(31,58,95,.12);border:1px solid #DDEBF3}
+.badge{display:table;margin:0 auto 14px;background:var(--ok);color:#fff;font-size:12px;font-weight:800;letter-spacing:.12em;padding:7px 14px;border-radius:30px}
+.mini{position:relative;height:200px;max-width:300px;margin:0 auto 10px}
+.mini .fx{position:absolute;width:42%;top:0;left:29%}
+.mini .f1{transform:rotate(-10deg) translateX(-42%)}.mini .f3{transform:rotate(10deg) translateX(42%)}.mini .f2{z-index:2}
+ul.ck{list-style:none;padding:0;margin:14px 0 0}
+ul.ck li{position:relative;padding:9px 0 9px 32px;border-bottom:1px dashed #DDEBF3;font-size:15.5px;color:var(--ink)}
+ul.ck li:last-child{border:0}
+ul.ck li::before{content:"✓";position:absolute;left:0;top:9px;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center}
+ul.ck li.gift::before{content:"🎁";background:none;font-size:18px}
+ul.ck li b{color:var(--az)}
+ul.ck li.gift b{color:var(--cor2)}
+.conf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.conf div{background:var(--gelo2);border-radius:12px;padding:12px 10px;font-size:14px;font-weight:700;color:var(--az);text-align:center;line-height:1.3}
+.conf div span{display:block;font-size:24px;margin-bottom:4px}
+
+/* bônus */
+.qtd{display:table;margin:-8px auto 22px;background:var(--cor);color:#fff;font-weight:800;font-size:14px;padding:7px 16px;border-radius:30px}
+.bn{background:#fff;border-radius:20px;padding:16px;border:1px solid #DDEBF3;box-shadow:0 10px 26px rgba(31,58,95,.08);margin-bottom:16px;position:relative}
+.stars{color:#F5B301;font-size:15px;letter-spacing:2px;text-align:center;margin-bottom:10px}
+.ph{aspect-ratio:1/1;border-radius:14px;background:linear-gradient(145deg,var(--gelo),#F4FAFD);display:grid;place-items:center;text-align:center;color:var(--az);font-size:12px;font-weight:600}
+.ph span{display:block;font-size:64px;line-height:1.1}
+.bi{display:block;width:100%;height:auto;aspect-ratio:1;border-radius:14px;background:var(--gelo2)}
+.bn .nb{position:absolute;top:58px;left:28px;background:var(--az);color:#fff;font-size:11px;font-weight:800;letter-spacing:.1em;padding:5px 10px;border-radius:6px}
+.bn h3{margin:14px 0 6px;font-size:20px}
+.bn p{font-size:15px}
+.bn .pl{font-size:12.5px;font-weight:700;color:var(--mut);margin-top:8px}
+.val{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:900}
+.val s{color:#8A97A8;font-weight:600}
+.val b{background:var(--ok);color:#fff;padding:4px 12px;border-radius:8px;font-size:15px;letter-spacing:.05em}
+
+/* planos */
+#planos{background:linear-gradient(180deg,var(--bg),var(--gelo2) 30%)}
+.sub{text-align:center;margin:-12px 0 24px;font-weight:600}
+.pl-c{background:#fff;border-radius:22px;padding:24px 20px;border:2px solid #DDEBF3;margin-bottom:20px;position:relative}
+.pl-c h3{font-size:24px;text-align:center}
+.pl-c .ps{text-align:center;font-weight:700;color:var(--cor2);font-size:14px;margin:4px 0 8px}
+.pl-c .pd{text-align:center;font-size:14.5px}
+.price{text-align:center;margin-top:18px}
+.price s{display:block;color:#8A97A8;font-size:15px}
+.price .v{font-weight:900;font-size:48px;color:var(--az);line-height:1;letter-spacing:-.02em;white-space:nowrap}
+.price .v small{font-size:20px;vertical-align:top;margin-right:3px}
+.price .pc{font-size:13.5px;color:var(--mut);margin-top:6px}
+.pl-c.top{background:var(--az);border-color:var(--az);box-shadow:0 18px 44px rgba(31,58,95,.32);padding-top:34px}
+.pl-c.top h3,.pl-c.top .price .v{color:#fff}
+.pl-c.top .pd,.pl-c.top .price .pc{color:#C9DCEB}
+.pl-c.top .ps{color:#FFB39E}
+.pl-c.top ul.ck li{color:#fff;border-color:rgba(207,232,243,.25)}
+.pl-c.top ul.ck li b{color:#fff}
+.pl-c.top ul.ck li.gift b{color:#FFB39E}
+.pl-c.top .price s{color:#9DB3C8}
+.rib{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--cor);color:#fff;font-weight:900;font-size:13px;letter-spacing:.14em;padding:8px 18px;border-radius:30px;white-space:nowrap;box-shadow:0 6px 14px rgba(232,85,47,.4)}
+.pl-c.top .mini{height:170px;margin-top:8px}
+.btn.sec{background:#fff;color:var(--az);border:2px solid var(--az);box-shadow:0 5px 0 var(--az);animation:none}
+.fecha{text-align:center;font-size:15.5px;margin-top:6px}
+.fecha b{color:var(--az)}
+
+/* garantia */
+.gar{text-align:center}
+.gar svg{width:150px;height:auto;margin:0 auto 14px;display:block}
+.gar h2{margin-bottom:12px}
+
+/* passos */
+.st{background:#fff;border:1px solid #DDEBF3;border-radius:18px;padding:18px;margin-bottom:14px;display:flex;gap:14px}
+.st .n{flex:none;width:44px;height:44px;border-radius:50%;background:var(--az);color:#fff;font-weight:900;font-size:20px;display:grid;place-items:center}
+.st h3{font-family:system-ui,sans-serif;font-weight:800;font-size:17px;margin-top:9px}
+.st ul.ck li{font-size:14.5px;padding:6px 0 6px 30px;border:0}
+.st ul.ck li::before{top:6px;width:20px;height:20px;font-size:12px}
+.st ul.ck{margin-top:6px}
+
+/* faq */
+details{background:#fff;border:1px solid #DDEBF3;border-radius:14px;margin-bottom:10px}
+summary{list-style:none;cursor:pointer;padding:16px 46px 16px 16px;font-weight:700;color:var(--az);position:relative;font-size:16px;line-height:1.35}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--gelo2);color:var(--cor2);font-size:20px;font-weight:800;display:grid;place-items:center}
+details[open] summary::after{content:"–"}
+details p{padding:0 16px 16px;font-size:15px}
+
+footer{background:var(--az);color:#B9CCDD;font-size:12.5px;line-height:1.6;padding:34px 0 40px;text-align:center}
+footer p{color:#B9CCDD;margin-bottom:12px}
+footer b{color:#fff}
+:focus-visible{outline:3px solid var(--cor);outline-offset:3px}
+@media(min-width:520px){.g2.two{grid-template-columns:repeat(2,minmax(0,1fr))}.g2.two .it{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<!-- DOBRA 1 — PROMESSA -->
+<section style="padding-top:30px">
+ <div class="w">
+  <p class="kick">Amamentação · Volta ao trabalho</p>
+  <h1 class="c"><span class="hl">24 fichas</span> do Calendário Regressivo para montar o estoque de leite materno antes de voltar ao trabalho</h1>
+  <div class="line"></div>
+  <img class="hi" src="img/hero.webp" width="720" height="720" fetchpriority="high" decoding="async" alt="24 Fichas do Calendário Regressivo: Ficha 01 Calendário Regressivo, Fila do Freezer, O Que Vai para o Lixo e Rede de Ajuda">
+  <p class="c" style="margin-top:14px">Um plano visual <b>dia a dia</b> para estocar, rotular e organizar o seu leite nos 15 dias antes da licença acabar — e um <b>painel de geladeira</b> para a avó, a babá ou a creche oferecerem no copinho sem errar. É só imprimir e colar.</p>
+  <a class="btn" href="#planos">QUERO MEU CALENDÁRIO REGRESSIVO<small>Faltam quantos dias pra sua licença acabar?</small></a>
+  <div class="trust"><span>Acesso imediato</span><span>Celular, tablet ou computador</span><span>PDF para imprimir</span></div>
+ </div>
+</section>
+
+<!-- DOBRA 2 — O QUE VOCÊ VAI ENCONTRAR -->
+<section class="alt">
+ <div class="w">
+  <h2>O que você vai encontrar nas 24 fichas</h2>
+  <div class="car"><div class="trk t8">
+   <img class="fi" data-src="img/ficha-01.webp" width="440" height="622" decoding="async" alt="Ficha 01/24 — Calendário Regressivo">
+   <img class="fi" data-src="img/ficha-11.webp" width="440" height="622" decoding="async" alt="Ficha 11/24 — Ensaio da Ausência">
+   <img class="fi" data-src="img/ficha-12.webp" width="440" height="622" decoding="async" alt="Ficha 12/24 — Checklist do D-1">
+   <img class="fi" data-src="img/ficha-14.webp" width="440" height="622" decoding="async" alt="Ficha 14/24 — Copinho Passo a Passo">
+   <img class="fi" data-src="img/ficha-16.webp" width="440" height="622" decoding="async" alt="Ficha 16/24 — O Que Vai para o Lixo">
+   <img class="fi" data-src="img/ficha-17.webp" width="440" height="622" decoding="async" alt="Ficha 17/24 — Registro do Dia">
+   <img class="fi" data-src="img/ficha-18.webp" width="440" height="622" decoding="async" alt="Ficha 18/24 — Quando Avisar a Mãe">
+   <img class="fi" data-src="img/ficha-23.webp" width="440" height="622" decoding="async" alt="Ficha 23/24 — Mapa da Primeira Semana">
+   <img class="fi" data-src="img/ficha-01.webp" width="440" height="622" decoding="async" alt="" aria-hidden="true">
+   <img class="fi" data-src="img/ficha-11.webp" width="440" height="622" decoding="async" alt="" aria-hidden="true">
+   <img class="fi" data-src="img/ficha-12.webp" width="440" height="622" decoding="async" alt="" aria-hidden="true">
+   <img class="fi" data-src="img/ficha-14.webp" width="440" height="622" decoding="async" alt="" aria-hidden="true">
+   <img class="fi" data-src="img/ficha-16.webp" width="440" height="622" decoding="async" alt="" aria-hidden="true">
+   <img class="fi" data-src="img/ficha-17.webp" width="440" height="622" decoding="async" alt="" aria-hidden="true">
+   <img class="fi" data-src="img/ficha-18.webp" width="440" height="622" decoding="async" alt="" aria-hidden="true">
+   <img class="fi" data-src="img/ficha-23.webp" width="440" height="622" decoding="async" alt="" aria-hidden="true">
+  </div></div>
+  <p class="intro">As fichas seguem a ordem do calendário: <b>planejar, estocar, entregar à cuidadora e manter</b>. Você abre a ficha do dia e sabe o que fazer.</p>
+  <div class="g2">
+   <div class="it"><span class="bl">1</span><div><h3>Calendário D-15 → D-0</h3><p>O que fazer em cada um dos 15 dias antes de voltar.</p></div></div>
+   <div class="it"><span class="bl">2</span><div><h3>Conta do estoque</h3><p>Quantas porções preparar para o tempo que você fica fora.</p></div></div>
+   <div class="it"><span class="bl">3</span><div><h3>Fila do freezer</h3><p>O frasco mais antigo sai primeiro e nada vence.</p></div></div>
+   <div class="it"><span class="bl">4</span><div><h3>Rótulo padrão</h3><p>Data, hora da coleta e nome em todo frasco.</p></div></div>
+   <div class="it"><span class="bl">5</span><div><h3>Ordenha manual</h3><p>5 movimentos para ordenhar sem precisar de bomba.</p></div></div>
+   <div class="it"><span class="bl">6</span><div><h3>Descongelar certo</h3><p>Banho-maria, sem ferver e sem recongelar.</p></div></div>
+   <div class="it"><span class="bl">7</span><div><h3>Copinho passo a passo</h3><p>Como a cuidadora oferece sem derramar nem forçar.</p></div></div>
+   <div class="it"><span class="bl">8</span><div><h3>Ordenha no trabalho</h3><p>Usar as pausas e levar o leite pra casa na bolsa térmica.</p></div></div>
+  </div>
+  <a class="btn" href="#planos">QUERO AS 24 FICHAS</a>
+ </div>
+</section>
+
+<!-- DOBRA 3 — POR QUE É VALIOSO -->
+<section>
+ <div class="w">
+  <h2>Por que esse material faz diferença na sua volta</h2>
+  <div class="g2 two">
+   <div class="it"><span class="ic">📅</span><div><h3>Você sabe o que fazer hoje</h3><p>Cada dia tem uma tarefa clara, sem ler e-book inteiro.</p></div></div>
+   <div class="it"><span class="ic">❄️</span><div><h3>Leite dentro da validade</h3><p>O estoque começa no D-15, porque congelado dura até 15 dias.</p></div></div>
+   <div class="it"><span class="ic">🏷️</span><div><h3>Freezer em ordem</h3><p>Frascos rotulados e em fila, do mais antigo ao mais novo.</p></div></div>
+   <div class="it"><span class="ic">👵</span><div><h3>Cuidadora preparada</h3><p>Painel na geladeira pra avó, babá ou creche seguir sozinha.</p></div></div>
+   <div class="it"><span class="ic">🖨️</span><div><h3>Imprime e cola</h3><p>Fichas A4, uma por página, prontas pra usar.</p></div></div>
+   <div class="it"><span class="ic">🩺</span><div><h3>Baseado na SBP</h3><p>Prazos e cuidados tirados de orientação oficial.</p></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- DOBRA 4 — DOR -->
+<div class="faixa"><div class="w"><h2>A licença tem data pra acabar. <span>E o seu estoque de leite, tem plano?</span></h2></div></div>
+<section style="padding-top:0">
+ <div class="w">
+  <div class="dest">
+   <h3 class="c">Chega de congelar leite no escuro</h3>
+   <p class="c">Medo de faltar leite, de jogar estoque fora e de a cuidadora errar. Os materiais que existem explicam <i>como</i> estocar. O Calendário Regressivo mostra <b>quando fazer cada coisa</b>: começa 15 dias antes, porque é o tempo que o leite congelado dura. Antes disso, vence. Na última semana, vira correria.</p>
+   <div class="d15"><span>D-15 estoque</span><span>D-7 copinho</span><span>D-3 ensaio</span><span>D-1 painel</span></div>
+   <a class="btn" href="#planos">COMEÇAR MEU D-15</a>
+  </div>
+ </div>
+</section>
+
+<!-- DOBRA 5 — AMOSTRA -->
+<section class="alt" style="padding:36px 0">
+ <div class="w">
+  <h2 style="margin-bottom:6px">Veja por dentro algumas fichas</h2>
+  <div class="car"><div class="trk r t2">
+   <img class="fq" data-src="img/uso-mae-geladeira.webp" width="640" height="640" decoding="async" alt="Mãe marcando o Calendário Regressivo colado na geladeira">
+   <img class="fq" data-src="img/uso-calendario-geladeira.webp" width="640" height="640" decoding="async" alt="Ficha 01 Calendário Regressivo colada na geladeira">
+   <img class="fq" data-src="img/uso-checklist-d1.webp" width="640" height="640" decoding="async" alt="Mãe preenchendo a Ficha 12 Checklist do D-1 com a bolsa térmica ao lado">
+   <img class="fq" data-src="img/uso-fila-freezer.webp" width="640" height="640" decoding="async" alt="Ficha 08 Fila do Freezer ao lado de frascos de leite rotulados por data">
+   <img class="fq" data-src="img/uso-registro-cuidadora.webp" width="640" height="640" decoding="async" alt="Mãe mostrando à cuidadora a Ficha 17 Registro do Dia">
+   <img class="fq" data-src="img/uso-rede-ajuda-avo.webp" width="640" height="640" decoding="async" alt="Mãe com o bebê e a avó preenchendo a Ficha 24 Rede de Ajuda">
+   <img class="fq" data-src="img/uso-rede-ajuda.webp" width="640" height="640" decoding="async" alt="Mãe e avó revisando a Ficha 24 Rede de Ajuda">
+   <img class="fq" data-src="img/uso-mae-geladeira.webp" width="640" height="640" decoding="async" alt="" aria-hidden="true">
+   <img class="fq" data-src="img/uso-calendario-geladeira.webp" width="640" height="640" decoding="async" alt="" aria-hidden="true">
+   <img class="fq" data-src="img/uso-checklist-d1.webp" width="640" height="640" decoding="async" alt="" aria-hidden="true">
+   <img class="fq" data-src="img/uso-fila-freezer.webp" width="640" height="640" decoding="async" alt="" aria-hidden="true">
+   <img class="fq" data-src="img/uso-registro-cuidadora.webp" width="640" height="640" decoding="async" alt="" aria-hidden="true">
+   <img class="fq" data-src="img/uso-rede-ajuda-avo.webp" width="640" height="640" decoding="async" alt="" aria-hidden="true">
+   <img class="fq" data-src="img/uso-rede-ajuda.webp" width="640" height="640" decoding="async" alt="" aria-hidden="true">
+  </div></div>
+ </div>
+</section>
+
+<!-- DOBRA 6 — IDEAL PARA VOCÊ -->
+<section>
+ <div class="w">
+  <h2>Ideal pra você que deseja…</h2>
+  <div class="g2 two">
+   <div class="it"><span class="ic">💼</span><div><h3>Voltar ao trabalho tranquila</h3><p>Sabendo exatamente o que fazer nos dias que faltam.</p></div></div>
+   <div class="it"><span class="ic">🤱</span><div><h3>Continuar dando seu leite</h3><p>Mesmo passando o dia fora de casa.</p></div></div>
+   <div class="it"><span class="ic">🧊</span><div><h3>Não desperdiçar estoque</h3><p>Nenhum frasco esquecido no fundo do freezer.</p></div></div>
+   <div class="it"><span class="ic">🤝</span><div><h3>Confiar em quem fica com o bebê</h3><p>Avó, babá ou creche seguindo o mesmo painel.</p></div></div>
+   <div class="it"><span class="ic">⏱️</span><div><h3>Ganhar tempo</h3><p>Fichas visuais no lugar de horas de leitura.</p></div></div>
+   <div class="it"><span class="ic">📲</span><div><h3>Acompanhar de longe</h3><p>Registro do dia pra saber como foi cada oferta.</p></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- DOBRA 7 — TUDO O QUE VOCÊ VAI RECEBER -->
+<section class="alt">
+ <div class="w">
+  <div class="card">
+   <span class="badge">⚡ ACESSO IMEDIATO</span>
+   <h2 style="margin-bottom:14px">Tudo o que você vai receber</h2>
+   <img class="pi" src="img/produto.webp" width="560" height="560" loading="lazy" decoding="async" alt="Calendário Regressivo — 24 Fichas">
+   <ul class="ck">
+    <li><b>Módulo 1 · Planejar</b> — 5 fichas para montar o plano antes de ordenhar</li>
+    <li><b>Módulo 2 · Estocar</b> — 7 fichas do D-15 ao D-1, sem desperdício</li>
+    <li><b>Módulo 3 · Painel da Cuidadora</b> — 6 fichas para colar na geladeira</li>
+    <li><b>Módulo 4 · Manter</b> — 6 fichas para as semanas de trabalho</li>
+    <li><b>PDF A4</b> para imprimir em casa ou na papelaria</li>
+   </ul>
+   <div class="conf">
+    <div><span>📅</span>Calendário D-15 → D-0</div>
+    <div><span>🧮</span>Conta das porções</div>
+    <div><span>❄️</span>Fila do freezer</div>
+    <div><span>🚦</span>Semáforo da validade</div>
+    <div><span>🥛</span>Copinho passo a passo</div>
+    <div><span>💼</span>Ordenha no trabalho</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- DOBRA 8 — BÔNUS -->
+<section>
+ <div class="w">
+  <h2>Bônus exclusivos do Plano Completo</h2>
+  <span class="qtd">🎁 4 BÔNUS</span>
+  <div class="bn"><div class="stars">★★★★★</div><img class="bi" src="img/bonus-1-etiquetas.webp" width="640" height="640" loading="lazy" decoding="async" alt="Bônus: 60 Etiquetas Prontas do Estoque"><span class="nb">BÔNUS 1</span>
+   <h3>60 Etiquetas Prontas do Estoque</h3><p>Rotule cada frasco em segundos, no mesmo padrão da Ficha 07. É só imprimir, recortar e colar.</p><p class="pl">Só no Plano Completo</p>
+   <div class="val"><s data-bonus="0"></s><b>GRÁTIS</b></div></div>
+  <div class="bn"><div class="stars">★★★★★</div><img class="bi" src="img/bonus-2-plano-b-recusa.webp" width="640" height="640" loading="lazy" decoding="async" alt="Bônus: Plano B da Recusa"><span class="nb">BÔNUS 2</span>
+   <h3>Plano B da Recusa</h3><p>E se o bebê não aceitar o copinho? Xícara, colher, outra pessoa oferecendo e quando procurar ajuda.</p><p class="pl">Só no Plano Completo</p>
+   <div class="val"><s data-bonus="1"></s><b>GRÁTIS</b></div></div>
+  <div class="bn"><div class="stars">★★★★★</div><img class="bi" src="img/bonus-3-kit-rh.webp" width="640" height="640" loading="lazy" decoding="async" alt="Bônus: Kit Conversa com o RH"><span class="nb">BÔNUS 3</span>
+   <h3>Kit Conversa com o RH</h3><p>Roteiro e mensagem pronta para combinar as pausas do art. 396 da CLT e perguntar sobre sala de apoio.</p><p class="pl">Só no Plano Completo</p>
+   <div class="val"><s data-bonus="2"></s><b>GRÁTIS</b></div></div>
+  <div class="bn"><div class="stars">★★★★★</div><img class="bi" src="img/bonus-4-edicao-creche.webp" width="640" height="640" loading="lazy" decoding="async" alt="Bônus: Edição Creche"><span class="nb">BÔNUS 4</span>
+   <h3>Edição Creche</h3><p>Ficha de envio do leite e bilhete pronto para a escola, no mesmo padrão do painel.</p><p class="pl">Só no Plano Completo</p>
+   <div class="val"><s data-bonus="3"></s><b>GRÁTIS</b></div></div>
+ </div>
+</section>
+
+<!-- DOBRA 9 — PLANOS -->
+<section id="planos">
+ <div class="w">
+  <h2>Sua contagem regressiva já começou</h2>
+  <p class="sub">Escolha a opção ideal para você</p>
+
+  <div class="pl-c">
+   <h3>Plano Básico</h3>
+   <p class="ps">O Calendário Regressivo</p>
+   <p class="pd">As 24 fichas para planejar, estocar e entregar o leite à cuidadora.</p>
+   <ul class="ck">
+    <li><b>24 fichas</b> em 4 módulos</li>
+    <li>Calendário D-15 → D-0</li>
+    <li>Painel da Cuidadora para a geladeira</li>
+    <li>PDF A4 para imprimir</li>
+   </ul>
+   <div class="price"><s data-cfg="ancoraBasico"></s><div class="v"><small>R$</small>19,90</div><p class="pc" data-cfg="parcBasico"></p></div>
+   <a class="btn sec" data-link="checkoutBasico" href="https://pay.hotmart.com/H108651666S?off=o6bg5nvc&amp;checkoutMode=10">QUERO O BÁSICO</a>
+  </div>
+
+  <div class="pl-c top">
+   <span class="rib">RECOMENDADO</span>
+   <h3>Plano Completo</h3>
+   <p class="ps">Calendário + 4 bônus exclusivos</p>
+   <p class="pd">Tudo do Básico, mais as etiquetas prontas e o que resolve a recusa do copinho, a conversa com o RH e a ida para a creche.</p>
+   <div class="mini" role="img" aria-label="Mockup do Plano Completo">
+    <div class="fx f1"><div class="fx-h"><b>BÔNUS</b></div><div class="fx-t">Plano B da Recusa</div><div class="fx-hero">🥄</div><div class="fx-f">&nbsp;</div></div>
+    <div class="fx f3"><div class="fx-h"><b>BÔNUS</b></div><div class="fx-t">Edição Creche</div><div class="fx-hero">🎒</div><div class="fx-f">&nbsp;</div></div>
+    <div class="fx f2"><div class="fx-h"><b>01/24</b></div><div class="fx-t">Calendário</div><div class="fx-hero">📅</div><div class="fx-f">&nbsp;</div></div>
+   </div>
+   <ul class="ck">
+    <li><b>24 fichas</b> em 4 módulos</li>
+    <li>Calendário D-15 → D-0</li>
+    <li>Painel da Cuidadora para a geladeira</li>
+    <li>PDF A4 para imprimir</li>
+    <li class="gift"><b>Bônus:</b> 60 Etiquetas Prontas do Estoque</li>
+    <li class="gift"><b>Bônus:</b> Plano B da Recusa</li>
+    <li class="gift"><b>Bônus:</b> Kit Conversa com o RH</li>
+    <li class="gift"><b>Bônus:</b> Edição Creche</li>
+   </ul>
+   <div class="price"><s data-cfg="ancoraCompleto"></s><div class="v"><small>R$</small>27,90</div><p class="pc" data-cfg="parcCompleto"></p></div>
+   <a class="btn" data-link="checkoutCompleto" href="https://pay.hotmart.com/H108651666S?off=5un1gvp1&amp;checkoutMode=10">QUERO O COMPLETO<small>Só R$ 8 a mais pelos 4 bônus</small></a>
+  </div>
+
+  <p class="fecha">Cada frasco que você ordenha custa tempo e cansaço. Por <b>menos de R$ 30</b>, nenhum deles precisa ir pro lixo por falta de plano.</p>
+ </div>
+</section>
+
+<!-- DOBRA 10 — GARANTIA -->
+<section class="alt">
+ <div class="w gar">
+  <svg viewBox="0 0 160 180" role="img" aria-label="Selo de garantia de 7 dias"><path d="M80 6 148 30v54c0 42-30 74-68 90C42 158 12 126 12 84V30z" fill="#CFE8F3" stroke="#1F3A5F" stroke-width="6"/><path d="M80 22 134 41v43c0 33-23 59-54 72-31-13-54-39-54-72V41z" fill="#fff"/><text x="80" y="88" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="46" fill="#FF7A59">7</text><text x="80" y="114" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="20" fill="#FF7A59">DIAS</text><text x="80" y="136" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="11" letter-spacing="1.5" fill="#1F3A5F">GARANTIA</text></svg>
+  <h2>Garantia incondicional de 7 dias</h2>
+  <p>Baixe, imprima e use. Se em até 7 dias você achar que o Calendário não é pra você, é só pedir o reembolso pela plataforma e devolvemos <b>100% do valor</b>, sem perguntas e sem burocracia. Vale para o plano e para os adicionais comprados junto.</p>
+ </div>
+</section>
+
+<!-- DOBRA 11 — PASSO A PASSO -->
+<section>
+ <div class="w">
+  <h2 style="margin-bottom:8px">Como funciona o acesso</h2>
+  <p class="sub" style="margin-top:0">Do pagamento à porta da geladeira em poucos minutos</p>
+  <div class="st"><span class="n">1</span><div><h3>Escolha seu plano</h3><ul class="ck"><li>Pagamento por Pix ou cartão</li><li>Ambiente de compra seguro</li></ul></div></div>
+  <div class="st"><span class="n">2</span><div><h3>Receba o acesso no e-mail</h3><ul class="ck"><li>Liberado assim que o pagamento é confirmado</li><li>Não chegou? Olhe a caixa de spam</li></ul></div></div>
+  <div class="st"><span class="n">3</span><div><h3>Baixe e imprima</h3><ul class="ck"><li>PDF A4, uma ficha por página</li><li>Imprima em casa ou na papelaria</li><li>Abre no celular, tablet ou computador</li></ul></div></div>
+  <div class="st"><span class="n">4</span><div><h3>Comece pelo seu D-15</h3><ul class="ck"><li>Marque a data da volta na Ficha 01</li><li>Cole o Painel da Cuidadora na geladeira no D-1</li></ul></div></div>
+  <a class="btn" href="#planos">QUERO COMEÇAR AGORA</a>
+ </div>
+</section>
+
+<!-- DOBRA 12 — FAQ -->
+<section class="alt">
+ <div class="w">
+  <h2>Dúvidas frequentes</h2>
+  <details><summary>É um produto físico? Vou receber em casa?</summary><p>Não. É um PDF que você baixa e imprime em casa ou na papelaria. Nada é enviado pelo correio, por isso o acesso é na hora.</p></details>
+  <details><summary>Volto com 180 dias (Empresa Cidadã). Serve pra mim?</summary><p>Serve. O calendário parte da sua data de volta, seja aos 120 ou aos 180 dias de licença.</p></details>
+  <details><summary>Faltam menos de 15 dias pra eu voltar. Ainda vale?</summary><p>Vale. Você faz as fichas de planejamento rapidinho e entra no calendário pelo dia em que está. O que importa é o estoque estar organizado e a cuidadora preparada.</p></details>
+  <details><summary>Preciso comprar bomba de ordenha?</summary><p>Não. A Ficha 06 mostra a ordenha manual em 5 movimentos. A bomba é opcional, e a Ficha 03 lista só o que é essencial comprar.</p></details>
+  <details><summary>E se o meu bebê não aceitar o copinho?</summary><p>Ninguém pode garantir a aceitação, mas você chega preparada: o ensaio do D-7 treina antes, e o bônus Plano B da Recusa (Plano Completo) mostra alternativas e quando procurar ajuda.</p></details>
+  <details><summary>A avó ou a babá vão conseguir seguir?</summary><p>Sim. O Painel da Cuidadora tem ilustrações grandes e pouco texto, feito pra ficar colado na geladeira e ser consultado em segundos.</p></details>
+  <details><summary>De onde vêm os prazos de validade?</summary><p>Das orientações da Sociedade Brasileira de Pediatria e de cartilhas de serviços públicos de saúde, citadas nas fichas.</p></details>
+  <details><summary>Substitui a consultora de amamentação ou o pediatra?</summary><p>Não. As fichas organizam a sua rotina. A Ficha 24 mostra quando e onde procurar ajuda: banco de leite, UBS, consultora e pediatra.</p></details>
+  <details><summary>Posso imprimir mais de uma vez?</summary><p>Pode. O arquivo fica com você: imprima quantas vezes precisar, para uso pessoal — por exemplo, um painel pra casa da avó e outro pra sua.</p></details>
+  <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias de garantia. Pede o reembolso pela plataforma e recebe 100% do valor de volta, sem perguntas.</p></details>
+ </div>
+</section>
+
+<!-- DOBRA 13 — RODAPÉ -->
+<footer>
+ <div class="w">
+  <p><b>© 2026 Calendário Regressivo.</b> Todos os direitos reservados.</p>
+  <p>Este site não é afiliado ao Facebook, Instagram, Google, YouTube, TikTok ou a qualquer empresa dessas plataformas, nem à Sociedade Brasileira de Pediatria. Após sair do Facebook, a responsabilidade não é deles, e sim do nosso site.</p>
+  <p>Conteúdo informativo e organizacional. Não substitui orientação de pediatra, consultora de amamentação ou profissional de saúde.</p>
+  <p>Todo o material — textos, ilustrações e fichas — é protegido pela Lei de Direitos Autorais (Lei nº 9.610/98). É proibida a reprodução, distribuição, revenda ou compartilhamento, total ou parcial, sem autorização por escrito. A violação está sujeita às medidas legais cabíveis.</p>
+ </div>
+</footer>
+
+<script>
+{
+/* ===== CONFIG — edite aqui =====
+   Links de checkout da plataforma; preços "de" e valores dos bônus SÓ se forem reais (vazio = não aparece). */
+const CFG={
+ checkoutBasico:"https://pay.hotmart.com/H108651666S?off=o6bg5nvc&checkoutMode=10",
+ checkoutCompleto:"https://pay.hotmart.com/H108651666S?off=5un1gvp1&checkoutMode=10",
+ ancoraBasico:"",          // ex.: "De R$ 37,00"
+ ancoraCompleto:"",        // ex.: "De R$ 67,00"
+ parcBasico:"Pagamento único · Pix ou cartão",
+ parcCompleto:"Pagamento único · Pix ou cartão",
+ bonus:["","","",""]       // ex.: "R$ 17,00"
+};
+document.querySelectorAll("[data-cfg]").forEach(e=>{const v=CFG[e.dataset.cfg];if(v)e.textContent=v;else e.remove()});
+document.querySelectorAll("[data-bonus]").forEach(e=>{const v=CFG.bonus[+e.dataset.bonus];if(v)e.textContent=v;else e.remove()});
+document.querySelectorAll("[data-link]").forEach(e=>{const v=CFG[e.dataset.link];if(v&&v!=="#")e.href=v});
+/* carrossel: carrega as 8 fichas juntas quando a seção se aproxima (sem pesar o 1º carregamento) */
+const ld=c=>c.querySelectorAll("img[data-src]").forEach(i=>{i.src=i.dataset.src;i.removeAttribute("data-src")});
+const cars=document.querySelectorAll(".car");
+if("IntersectionObserver"in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){ld(e.target);io.unobserve(e.target)}}),{rootMargin:"900px 0px"});cars.forEach(c=>io.observe(c))}else cars.forEach(ld);
+}
+</script>
+</body>
+</html>
